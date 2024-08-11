@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="en"> <!-- 定義文件類型為HTML5，語言為英語 -->
+<head>
+    <meta charset="utf-8" /> <!-- 設置字符編碼為UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 設置視口，讓頁面適應不同設備的寬度 -->
+    <title>@ViewData["Title"] - MyApp</title> <!-- 頁面標題，從ViewData中獲取動態數據 -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> <!-- 引入Bootstrap的CSS文件 -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> <!-- 引入站點自定義的CSS文件，並附加版本參數 -->
+    <link rel="stylesheet" href="~/MyApp.styles.css" asp-append-version="true" /> <!-- 引入自定義的MyApp樣式表，並附加版本參數 -->
+    <style>
+        /* 這裡添加自定義的CSS樣式 */
+        body {
+            display: flex;
+            margin: 0;
+        }
+        #sidebar {
+            width: 130px; /* 設置側邊欄展開狀態的寬度，以確保能夠完整顯示MyApp */
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(to bottom left, purple, blue);
+            transition: width 0.3s, left 0.3s;
+        }
+        #sidebar.collapsed {
+            width: 130px; /* 收縮狀態寬度，根據需要調整為能夠顯示MyApp的寬度 */
+        }
+        #sidebar .nav-link {
+            white-space: nowrap;
+        }
+        #sidebar .nav-link .link-text {
+            display: inline;
+        }
+        #sidebar.collapsed .nav-link .link-text {
+            display: none;
+        }
+        #content {
+            margin-left: 130px; /* 根據側邊欄的展開狀態寬度設置內容的左邊距 */
+            transition: margin-left 0.3s;
+            padding: 20px;
+            flex: 1;
+        }
+        #content.collapsed {
+                margin-left: 130px; /* 收縮狀態下的右邊距 */
+        }
+        .toggle-btn {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            color: white;
+        }
+        .toggle-btn-icon {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar" class="collapsed">
+        <nav class="navbar navbar-light flex-column">
+            <a class="navbar-brand toggle-btn" onclick="toggleSidebar()">
+                <span class="toggle-btn-icon">&#9776;</span>
+                <span class="link-text">MyApp</span>
+            </a>
+            <ul class="navbar-nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">
+                        <span class="link-text">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">
+                        <span class="link-text">Privacy</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Login">
+                        <span class="link-text">Login</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Register">
+                        <span class="link-text">Register</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div id="content" class="collapsed">
+        <main role="main">
+            @RenderBody() <!-- 這裡會渲染頁面的主要內容 -->
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script> <!-- 引入jQuery庫 -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!-- 引入Bootstrap的JavaScript組件 -->
+    <script src="~/js/site.js" asp-append-version="true"></script> <!-- 引入自定義的JavaScript文件，並附加版本參數 -->
+    @await RenderSectionAsync("Scripts", required: false) <!-- 渲染附加的腳本區域，如果存在的話 -->
+
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            var content = document.getElementById('content');
+            sidebar.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+        }
+    </script>
+</body>
+</html>

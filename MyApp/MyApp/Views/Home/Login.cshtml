@@ -1,0 +1,95 @@
+﻿@model MyApp.Models.LoginViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* 設置整個頁面的背景為藍白色漸層 */
+        html,body {
+            background: linear-gradient(#6A5ACD, #ADD8E6); /* 從左到右的漸層顏色 */
+            display: flex; /* 使用Flexbox佈局 */
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            height: 100%; /* 設置高度為100%的視口高度 */
+            margin: 0; /* 移除默認的頁面外邊距 */
+            font-family: Arial, sans-serif; /* 設置字體 */
+        }
+
+        /* 登錄表單的容器樣式 */
+        .login-form {
+            background: #fff; /* 背景顏色為白色 */
+            padding: 20px; /* 內邊距為20px */
+            border-radius: 10px; /* 圓角邊框 */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
+            width: 100%; /* 寬度100% */
+            max-width: 400px; /* 最大寬度為400px */
+            text-align: center; /* 文字居中對齊 */
+        }
+
+        /* 每個表單項目的容器樣式 */
+        .login-form div {
+            margin-bottom: 15px; /* 下方外邊距為15px */
+        }
+
+        /* 標籤的樣式 */
+        .login-form label {
+            display: block; /* 塊級元素顯示 */
+            margin-bottom: 5px; /* 下方外邊距為5px */
+            font-weight: bold; /* 粗體字 */
+            text-align: left; /* 文字左對齊 */
+        }
+
+        /* 輸入框的樣式 */
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 100%; /* 寬度100% */
+            padding: 10px; /* 內邊距為10px */
+            border: 1px solid #ccc; /* 灰色邊框 */
+            border-radius: 5px; /* 圓角邊框 */
+            box-sizing: border-box; /* 包括內邊距和邊框在內計算寬度 */
+        }
+
+        /* 登錄按鈕的樣式 */
+        .login-form button {
+            width: 100%; /* 寬度100% */
+            padding: 10px; /* 內邊距為10px */
+            border: none; /* 無邊框 */
+            border-radius: 5px; /* 圓角邊框 */
+            background-color: #6A5ACD; /* 背景顏色 */
+            color: white; /* 文字顏色 */
+            font-size: 16px; /* 字體大小 */
+            cursor: pointer; /* 滑鼠指針樣式 */
+        }
+
+        /* 登錄按鈕的懸停效果 */
+        .login-form button:hover {
+            background-color: #5A4CBD; /* 懸停時的背景顏色 */
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 登錄表單的容器 -->
+    <div class="login-form">
+
+        <h2>Login</h2> <!-- 表單標題 -->
+        <!-- 表單開始 -->
+        <form asp-action="Login" method="post">
+            <!-- 用戶名輸入框的容器 -->
+            <div>
+                <label asp-for="Username">Username</label> <!-- 用戶名標籤 -->
+                <input asp-for="Username" type="text" placeholder="Enter your username" /> <!-- 用戶名輸入框，帶有提示文字 -->
+            </div>
+            <!-- 密碼輸入框的容器 -->
+            <div>
+                <label asp-for="Password">Password</label> <!-- 密碼標籤 -->
+                <input asp-for="Password" type="password" placeholder="Enter your password" /> <!-- 密碼輸入框，帶有提示文字 -->
+            </div>
+            <button type="submit">Login</button> <!-- 提交按鈕 -->
+        </form>
+    </div>
+</body>
+</html>
